@@ -2,8 +2,8 @@
 Exam 1, problem 3.
 
 Authors: David Mutchler, Vibha Alangar, Valerie Galluzzi, Mark Hays,
-         Amanda Stouder, their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         Amanda Stouder, their colleagues and Ethan Carter.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -103,6 +103,41 @@ def problem3(point, length, delta, window):
     #          Tests have been written for you (above).
     # --------------------------------------------------------------------------
 
+    begining_line_endpoint = rg.Point(point.x, point.y + length)
+    beginning_line = rg.Line(point, begining_line_endpoint)
+    beginning_line.thickness = 3
+    beginning_line.attach_to(window)
+    first_horizontal_line = rg.Line(rg.Point(point.x, point.y), rg.Point(point.x + length, point.y))
+    first_horizontal_line.thickness = 3
+    first_horizontal_line.color = 'pink'
+    line_count = 1
+    for k in range(int(length / delta) + 1):
+        if k != 0:
+            new_line_start_x = point.x
+            new_line_start_y = point.y + k * delta
+            new_line_end_x = point.x + length + (20 * k)
+            new_line_end_y = point.y + k * delta
+            new_line_start = rg.Point(new_line_start_x, new_line_start_y)
+            new_line_end = rg.Point(new_line_end_x, new_line_end_y)
+            new_line = rg.Line(new_line_start, new_line_end)
+
+            new_line.thickness = 3
+            line_count += 1
+            if line_count == 4:
+                line_count = 1
+
+            if line_count == 1:
+                new_line.color = 'pink'
+
+            elif line_count == 2:
+                new_line.color = 'blue'
+
+            else:
+                new_line.color = 'green'
+
+            new_line.attach_to(window)
+    first_horizontal_line.attach_to(window)
+    window.render()
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
